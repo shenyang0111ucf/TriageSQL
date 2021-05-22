@@ -1,7 +1,7 @@
 import json
 import re
-from models.input_multi_classification.utils import *
-from models.input_multi_classification.config import *
+from utils import *
+from config import *
 
 ablation = False
 

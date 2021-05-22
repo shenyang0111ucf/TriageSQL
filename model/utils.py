@@ -96,8 +96,7 @@ def turn_5type_to_multiclass(data_dict, label_dict):
 def tokenize_sequences(queries, databases, labels, model_name="roberta-large", input_max_len=256, label_overwrite=None):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     # seq:[label(str), query(str), schema_seq(str)], return: [input(torch.Tensor)], [labels(torch.Tensor)]
-    return tokenizer.batch_encode_plus(zip(queries, databases), return_tensors="pt",
-                                       pad_to_max_length=input_max_len, max_length=input_max_len, truncation=True), \
+    return tokenizer(queries, databases, return_tensors="pt", padding="longest", max_length=input_max_len, truncation=True), \
            torch.LongTensor([int(label) if label_overwrite is None else label_overwrite for label in labels])
 
 

@@ -48,8 +48,8 @@ if __name__ == '__main__':
     trainset = load_data(cfg.train_path)
     testset = load_data(cfg.dev_path)
     # # turncate
-    # trainset, _ = split_train_test(*trainset, max_size=cfg.data_max_size)
-    # testset, _ = split_train_test(*testset, max_size=cfg.data_max_size//2)
+    trainset, _ = split_train_test(*trainset, max_size=cfg.data_max_size)
+    testset, _ = split_train_test(*testset, max_size=cfg.data_max_size//2)
 
     print(f"train size:{len(trainset[0])}, test size: {len(testset[0])}.")
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
             print(f'\r[epoch {i}] [batch {j}/{len(train_labels)//cfg.batch_size}] : loss: {loss}', end='   ')
 
         if cfg.save is True:
-            torch.save(model.state_dict(), f'./checkpoints/{time_stamp}_params{i}.pkl')
+            torch.save(model.state_dict(), f'D:/TriageSQL_Data/checkpoints/{time_stamp}_params{i}.pkl')
 
         eval(model, test_loader, cfg)
 
